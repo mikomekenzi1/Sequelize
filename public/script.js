@@ -1,6 +1,6 @@
 async function windowActions() {
     const table = document.querySelector('.table');
-    const headerRow = document.querySelector('.tblRow');
+    const headerRow = document.querySelector('.table_row');
   
     console.log('window loaded');
     const request = await fetch('/api/dining/');
