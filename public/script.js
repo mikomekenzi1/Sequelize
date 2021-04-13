@@ -1,40 +1,66 @@
-async function windowActions() {
-    const table = document.querySelector('.table');
-    const headerRow = document.querySelector('.table_row');
+async function windowsActions() {
+  const request = await fetch('/api/dining');
+  const dinning_dict = await request.json();
+  const dinning_halls = dinning_dict['data'];
+   
+  //tests if fetch worked
+  console.log(dinning_halls);
   
-    console.log('window loaded');
-    const request = await fetch('/api/dining/');
-    const data = await request.json();
-    console.log(data);
+  
+  const hall_table = document.getElementById('data');
+  var tr = "";
 
-    data.forEach((element) => {
-        const tableheading = document.createElement('th');
-        tableheading.classList.add('cell heading');
+  
+  
+  hall_table.innerHTML = "";
+
+
+
+  dinning_halls.forEach((element) => {
+
+
+    const tableheading = document.createElement('th');
+           
         
-        tableheading.innerText = element;
-        headerRow.append(tableheading);
+           //create and assign
+           
+            const tr = document.createElement('tr');
+            const did = document.createElement('td');
+            const dname = document.createElement('td');
+            const daddress = document.createElement('td');
+        
     
-       //create and assign
-       
-        const tr = document.createElement('tr');
-        const did = document.createElement('td');
-        const dname = document.createElement('td');
-        const daddress = document.createElement('td');
     
-
-
-
-        did.innerText = element.hall_id;
-        dname.innerText = element.hall_name;
-        daddress.innerText = element.hall_address;
     
+            did.innerText = element.hall_id;
+            dname.innerText = element.hall_name;
+            daddress.innerText = element.hall_address;
+        
+    
+    // adds data to list
+            hall_table.append(tr);
+            tr.append(did);
+            tr.append(dname);
+            tr.append(daddress);
+          });
+          
+    }
 
-// adds data to list
-        table.append(tr);
-        tr.append(did);
-        tr.append(dname);
-        tr.append(daddress);
-      });
-      
-}
-window.onload = windowActions();
+
+window.onload = windowsActions;
+
+
+
+
+//       tr += '<tr>';
+//       tr += '<td>'+ element.hall_name + '</td>' + '<td>' + element.hall_address + '</td>';
+//       tr += '</tr>';
+//   });
+
+//   hall_table.innerHTML += tr;
+// } 
+
+
+
+
+
